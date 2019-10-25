@@ -1,0 +1,89 @@
+﻿@model Vidly.Models.MoviesModel
+@{
+    ViewBag.Title = "Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<h2>Movies</h2>
+
+<!--<form class="form-group" action="/Movies/Movies" method="post">
+    <input id="strSearchText" name="strSearchText" type="text" />
+    <input id="btnSearch" type="submit" value="Serach Movie" />
+</form>-->
+
+@using (Html.BeginForm("Movies", "Movies", FormMethod.Post, new { @class="form-group" }))
+{
+    @Html.TextBoxFor(s => s.searchMovie)
+    <input type="submit" value="Serach Movie" />
+}
+
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">
+                <p>Titel</p>
+            </th>
+            <th>
+                <p>Dateigrösse</p>
+            </th>
+            <th>
+                <p>Qualität</p>
+            </th>
+            <th>
+                <p>Anmerkung</p>
+            </th>
+            <th>
+                <p>Benotung</p>
+            </th>
+            <th>
+                <p>Jahr</p>
+            </th>
+            <th>
+                <p>Album</p>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model.Videos)
+    {
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.titel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dateigroesse)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.qualitaet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.anmerkung)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.benotung)
+                </td>
+                <td>
+                    @{
+                        var erscheinungsjahr = item.erscheinungsjahr;
+                        if (erscheinungsjahr > 0)
+                        {
+                            @Html.DisplayFor(modelItem => item.erscheinungsjahr);
+                        }
+                    }
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.album)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.v_id })
+                </td>
+            </tr>
+        </tbody>
+    }
+
+</table>
