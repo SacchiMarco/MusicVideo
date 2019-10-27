@@ -42,5 +42,47 @@ namespace Vidly.Controllers
             return View(liste);
         }
 
+        public ActionResult AddMovie()
+        {
+            var videos = new List<Videos>();
+            model.Videos = videos;
+            model.Kuenstler = selectListCreatKuenstler(_context.Kuenstler);
+            model.Kategorien = selectListCreatKategorien(_context.Kategorien);
+            
+            return View(model);
+        }
+
+
+        public IEnumerable<SelectListItem> selectListCreatKuenstler(IEnumerable<Kuenstler> items)
+        {
+            IEnumerable<SelectListItem> ListItems;
+            ListItems = items
+                .Select(i => new SelectListItem()
+                {
+
+                    Text = i.k_name,
+                    Value = i.k_id.ToString(),
+                    Selected = false
+                })
+                .ToList();
+
+            return ListItems;
+        }
+
+        public IEnumerable<SelectListItem> selectListCreatKategorien(IEnumerable<Kategorien> items)
+        {
+            IEnumerable<SelectListItem> ListItems;
+            ListItems = items
+                .Select(i => new SelectListItem()
+                {
+
+                    Text = i.a_name,
+                    Value = i.a_id.ToString(),
+                    Selected = false
+                })
+                .ToList();
+
+            return ListItems;
+        }
     }
 }
