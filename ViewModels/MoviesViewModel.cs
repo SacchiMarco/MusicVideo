@@ -17,5 +17,6 @@ namespace Vidly.Models
         public Videos Videos { get; set; }
         public Kategorien Kategorien { get; set; }
         public Kuenstler Kuenstler { get; set; }
+        public string ViewTitel { get; set; }
     }
 }

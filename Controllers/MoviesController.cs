@@ -11,7 +11,7 @@ namespace Vidly.Controllers
     {
 
         private MyDBContext _context;
-        private MoviesViewModel model = new MoviesViewModel();
+        
 
         public MoviesController()
         {
@@ -20,9 +20,12 @@ namespace Vidly.Controllers
     
         public ActionResult Movies()
         {
-            
+            var model = new MoviesViewModel
+            {
+                VideosList = _context.Videos
+            };
 
-            model.VideosList = _context.Videos;
+            
 
             return View(model);
         }
@@ -30,9 +33,11 @@ namespace Vidly.Controllers
         [HttpPost]
         public ActionResult Movies(MoviesViewModel strSearchText)
         {
+            var model = new MoviesViewModel
+            {
+                VideosList = _context.Videos.Where(s => s.titel.ToLower().Contains(strSearchText.searchMovie))
+            };
             
-            model.VideosList = _context.Videos.Where(s => s.titel.ToLower().Contains(strSearchText.searchMovie));
-
             return View(model);
         }
 
@@ -42,13 +47,23 @@ namespace Vidly.Controllers
             return View(liste);
         }
 
-        public ActionResult AddMovie()
+        public ActionResult SaveMovie(Videos videos)
         {
-            
-            model.KuenstlerList = _context.Kuenstler;
-            model.KategorienList = _context.Kategorien;
-            
-            return View(model);
+            var viewModel = new MoviesViewModel();
+            if (videos.v_id == 0)
+            {
+                viewModel.KuenstlerList = _context.Kuenstler;
+                viewModel.KategorienList = _context.Kategorien;
+                viewModel.ViewTitel = "Add new Movie";
+
+                return View(viewModel);
+            }
+            else
+            {
+                return View();
+            }
+
+            return HttpNotFound();
         }
 
     }
