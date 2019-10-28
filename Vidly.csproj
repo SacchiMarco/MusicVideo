@@ -133,12 +133,16 @@
     <Compile Include="Migrations\201910222224082_initial.Designer.cs">
       <DependentUpon>201910222224082_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910281939404_erscheinungsjahrToNullable.cs" />
+    <Compile Include="Migrations\201910281939404_erscheinungsjahrToNullable.Designer.cs">
+      <DependentUpon>201910281939404_erscheinungsjahrToNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Costumers.cs" />
     <Compile Include="Models\Kategorien.cs" />
     <Compile Include="Models\Kuenstler.cs" />
     <Compile Include="Models\Movie.cs" />
-    <Compile Include="Models\MoviesModel.cs" />
+    <Compile Include="ViewModels\MoviesViewModel.cs" />
     <Compile Include="Models\MyDbContext.cs" />
     <Compile Include="Models\Videos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -244,6 +248,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910222224082_initial.resx">
       <DependentUpon>201910222224082_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910281939404_erscheinungsjahrToNullable.resx">
+      <DependentUpon>201910281939404_erscheinungsjahrToNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

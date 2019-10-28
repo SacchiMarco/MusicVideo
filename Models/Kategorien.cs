@@ -15,6 +15,7 @@ namespace Vidly.Models
         public string a_name { get; set; }
         
         [ForeignKey("fk_a_id")]
+        [Display(Name = "Kategorie")]
         public ICollection<Videos> Videos { get; set; }
     }
 }

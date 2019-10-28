@@ -1,4 +1,4 @@
-﻿@model Vidly.Models.MoviesModel
+﻿@model Vidly.Models.MoviesViewModel
 @{
     ViewBag.Title = "Movies";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -47,7 +47,7 @@
         </tr>
     </thead>
 
-    @foreach (var item in Model.Videos)
+    @foreach (var item in Model.VideosList)
     {
         <tbody>
             <tr>

@@ -11,7 +11,7 @@ namespace Vidly.Controllers
     {
 
         private MyDBContext _context;
-        private MoviesModel model = new MoviesModel();
+        private MoviesViewModel model = new MoviesViewModel();
 
         public MoviesController()
         {
@@ -22,16 +22,16 @@ namespace Vidly.Controllers
         {
             
 
-            model.Videos = _context.Videos;
+            model.VideosList = _context.Videos;
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Movies(MoviesModel strSearchText)
+        public ActionResult Movies(MoviesViewModel strSearchText)
         {
             
-            model.Videos = _context.Videos.Where(s => s.titel.ToLower().Contains(strSearchText.searchMovie));
+            model.VideosList = _context.Videos.Where(s => s.titel.ToLower().Contains(strSearchText.searchMovie));
 
             return View(model);
         }
@@ -44,45 +44,12 @@ namespace Vidly.Controllers
 
         public ActionResult AddMovie()
         {
-            var videos = new List<Videos>();
-            model.Videos = videos;
-            model.Kuenstler = selectListCreatKuenstler(_context.Kuenstler);
-            model.Kategorien = selectListCreatKategorien(_context.Kategorien);
+            
+            model.KuenstlerList = _context.Kuenstler;
+            model.KategorienList = _context.Kategorien;
             
             return View(model);
         }
 
-
-        public IEnumerable<SelectListItem> selectListCreatKuenstler(IEnumerable<Kuenstler> items)
-        {
-            IEnumerable<SelectListItem> ListItems;
-            ListItems = items
-                .Select(i => new SelectListItem()
-                {
-
-                    Text = i.k_name,
-                    Value = i.k_id.ToString(),
-                    Selected = false
-                })
-                .ToList();
-
-            return ListItems;
-        }
-
-        public IEnumerable<SelectListItem> selectListCreatKategorien(IEnumerable<Kategorien> items)
-        {
-            IEnumerable<SelectListItem> ListItems;
-            ListItems = items
-                .Select(i => new SelectListItem()
-                {
-
-                    Text = i.a_name,
-                    Value = i.a_id.ToString(),
-                    Selected = false
-                })
-                .ToList();
-
-            return ListItems;
-        }
     }
 }
