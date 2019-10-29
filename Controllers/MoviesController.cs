@@ -47,10 +47,10 @@ namespace Vidly.Controllers
             return View(liste);
         }
 
-        public ActionResult SaveMovie(Videos videos)
+        public ActionResult SaveMovie(int id)
         {
             var viewModel = new MoviesViewModel();
-            if (videos.v_id == 0)
+            if (id == 0)
             {
                 viewModel.KuenstlerList = _context.Kuenstler;
                 viewModel.KategorienList = _context.Kategorien;
@@ -62,8 +62,20 @@ namespace Vidly.Controllers
             {
                 return View();
             }
+        }
 
-            return HttpNotFound();
+        [HttpPost]
+        public ActionResult SaveMovie(MoviesViewModel formPosts)
+        {
+            if(formPosts.Videos.v_id == 0)
+            {
+                _context.Videos.Add(formPosts.Videos);
+                _context.SaveChanges();
+
+                
+            }
+
+            return Redirect("Movies");
         }
 
     }
